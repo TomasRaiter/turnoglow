@@ -4,6 +4,9 @@ import Login from './pages/Login.jsx';
 import Services from './pages/Services.jsx';
 import Book from './pages/Book.jsx';
 import MyAppointments from './pages/MyAppointments.jsx';
+import Agenda from './pages/admin/Agenda.jsx';
+import AdminServices from './pages/admin/AdminServices.jsx';
+import BlockedDays from './pages/admin/BlockedDays.jsx';
 import Register from './pages/Register.jsx';
 
 function Header() {
@@ -38,6 +41,9 @@ export default function App() {
           <Route path="/" element={<Services />} />
           <Route path="/reservar" element={<RequireAuth role="cliente"><Book /></RequireAuth>} />
           <Route path="/mis-turnos" element={<RequireAuth role="cliente"><MyAppointments /></RequireAuth>} />
+          <Route path="/admin/agenda" element={<RequireAuth role="admin"><Agenda /></RequireAuth>} />
+          <Route path="/admin/servicios" element={<RequireAuth role="admin"><AdminServices /></RequireAuth>} />
+          <Route path="/admin/dias" element={<RequireAuth role="admin"><BlockedDays /></RequireAuth>} />
           <Route path="/ingresar" element={<Login />} />
           <Route path="/registro" element={<Register />} />
           <Route path="*" element={<p>Página no encontrada.</p>} />
