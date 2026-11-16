@@ -138,3 +138,39 @@ export function checkClientLimits({ activeFuture, noShows }) {
   }
   return null;
 }
+
+// ---------- Cancelaciones y estados (RN-05, RN-18..RN-21) ----------
+export const CANCEL_LIMIT_HOURS = 24;
+export const FINAL_STATUSES = ['completado', 'ausente'];
+
+export function checkCancel({ appointment, user, now }) {
+  const isAdmin = user.role === 'admin';
+  if (!isAdmin && appointment.userId !== user.id) {
+    return { status: 403, rule: 'RN-05', message: 'Ese turno no es tuyo' };
+  }
+  if (appointment.status !== 'confirmado') {
+    return { status: 422, rule: 'RN-21', message: `El turno ya está ${appointment.status}` };
+  }
+  const hoursLeft = (new Date(appointment.start).getTime() - now.getTime()) / HOUR;
+  if (!isAdmin && hoursLeft < CANCEL_LIMIT_HOURS) {
+    return {
+      status: 422,
+      rule: 'RN-18',
+      message: `Solo podés cancelar hasta ${CANCEL_LIMIT_HOURS} horas antes. Comunicate con el estudio`,
+    };
+  }
+  return null; // RN-19: la administradora puede cancelar siempre
+}
+
+export function checkStatusChange({ appointment, status, now }) {
+  if (!FINAL_STATUSES.includes(status)) {
+    return { status: 400, rule: 'RN-20', message: 'Estado inválido: debe ser completado o ausente' };
+  }
+  if (appointment.status !== 'confirmado') {
+    return { status: 422, rule: 'RN-21', message: `El turno ya está ${appointment.status}` };
+  }
+  if (new Date(appointment.start).getTime() > now.getTime()) {
+    return { status: 422, rule: 'RN-20', message: 'Solo se puede marcar un turno que ya empezó' };
+  }
+  return null;
+}

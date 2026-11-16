@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { checkClientLimits, checkSlot, isValidDate, isValidTime, localParts, toInstant } from '../rules.js';
+import {
+  checkCancel, checkClientLimits, checkSlot, checkStatusChange, dayRange, isValidDate, isValidTime, localParts, toInstant,
+} from '../rules.js';
 import { AppError, badRequest, forbidden } from '../errors.js';
-import { requireAuth } from '../auth.js';
+import { requireAdmin, requireAuth } from '../auth.js';
 import { findService } from './services.js';
 import { busyOn, isBlocked } from './availability.js';
 
@@ -79,6 +81,54 @@ export function appointmentRoutes() {
       [req.user.id, service.id, start, end],
     );
     res.status(201).json(await findAppointment(db, rows[0].id));
+  });
+
+  // RN-05: cada clienta ve solo sus turnos.
+  r.get('/mine', requireAuth, async (req, res) => {
+    const { db } = req.app.locals.ctx;
+    const { rows } = await db.query(`${APPOINTMENT_SELECT} WHERE a.user_id = $1 ORDER BY a.start_at DESC`, [req.user.id]);
+    res.json(rows.map(toAppointment));
+  });
+
+  r.post('/:id/cancel', requireAuth, async (req, res) => {
+    const { db, clock } = req.app.locals.ctx;
+    const appointment = await findAppointment(db, req.params.id);
+    const problem = checkCancel({ appointment, user: req.user, now: clock.now() });
+    if (problem) throw new AppError(problem.status, problem.message, problem.rule);
+    await db.query("UPDATE appointments SET status = 'cancelado' WHERE id = $1", [appointment.id]);
+    res.json(await findAppointment(db, appointment.id));
+  });
+
+  return r;
+}
+
+export function adminAppointmentRoutes() {
+  const r = Router();
+  r.use(requireAdmin);
+
+  // Agenda: turnos de un día (o próximos si no se pasa fecha).
+  r.get('/', async (req, res) => {
+    const { db, clock } = req.app.locals.ctx;
+    const { date } = req.query;
+    let rows;
+    if (date) {
+      if (!isValidDate(date)) throw badRequest('Fecha inválida (formato AAAA-MM-DD)');
+      const { start, end } = dayRange(date);
+      ({ rows } = await db.query(`${APPOINTMENT_SELECT} WHERE a.start_at >= $1 AND a.start_at < $2 ORDER BY a.start_at`, [start, end]));
+    } else {
+      ({ rows } = await db.query(`${APPOINTMENT_SELECT} WHERE a.start_at >= $1 ORDER BY a.start_at`, [dayRange(localParts(clock.now()).date).start]));
+    }
+    res.json(rows.map(toAppointment));
+  });
+
+  r.post('/:id/status', async (req, res) => {
+    const { db, clock } = req.app.locals.ctx;
+    const appointment = await findAppointment(db, req.params.id);
+    const status = req.body?.status;
+    const problem = checkStatusChange({ appointment, status, now: clock.now() });
+    if (problem) throw new AppError(problem.status, problem.message, problem.rule);
+    await db.query('UPDATE appointments SET status = $1 WHERE id = $2', [status, appointment.id]);
+    res.json(await findAppointment(db, appointment.id));
   });
 
   return r;
