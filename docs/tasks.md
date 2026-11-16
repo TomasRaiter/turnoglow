@@ -5,7 +5,7 @@ Cada tarea se entrega en **un commit** cuyo mensaje empieza con su código.
 - [x] **T01** — Documentación inicial: spec con reglas numeradas, AGENTS.md, plan y tareas.
 - [x] **T02** — Estructura del backend, esquema SQL, conexión a la base y reloj inyectable.
 - [x] **T03** — Autenticación: registro, login, JWT y roles (RN-01..RN-05).
-- [ ] **T04** — Servicios: catálogo público y ABM de administración (RN-06..RN-08).
+- [x] **T04** — Servicios: catálogo público y ABM de administración (RN-06..RN-08).
 - [ ] **T05** — Disponibilidad de horarios (RN-09..RN-15).
 - [ ] **T06** — Reserva de turnos con todas las validaciones (RN-07, RN-09..RN-17).
 - [ ] **T07** — Cancelación y cambio de estado de turnos (RN-05, RN-18..RN-21).

@@ -33,7 +33,7 @@ Todas las horas se expresan en la zona horaria del estudio: **America/Argentina/
 ### Servicios
 - **RN-06** — Un servicio tiene nombre obligatorio, duración múltiplo de 30 entre 30 y 240 minutos, y precio mayor a 0.
 - **RN-07** — Solo los servicios activos se muestran a las clientas y pueden reservarse.
-- **RN-08** — Un servicio que tiene turnos futuros confirmados no se puede eliminar; solo se puede desactivar.
+- **RN-08** — Un servicio que tiene turnos asociados (de cualquier estado, para conservar el historial) no se puede eliminar; solo se puede desactivar.
 
 ### Agenda y disponibilidad
 - **RN-09** — El estudio atiende de **lunes a sábado de 09:00 a 19:00**. Domingo cerrado.

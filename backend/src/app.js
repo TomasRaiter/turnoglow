@@ -3,6 +3,7 @@ import cors from 'cors';
 import { systemClock } from './clock.js';
 import { AppError } from './errors.js';
 import { authRoutes } from './routes/auth.js';
+import { serviceRoutes } from './routes/services.js';
 
 export function createApp({ db, clock = systemClock, jwtSecret = process.env.JWT_SECRET, corsOrigin = process.env.CORS_ORIGIN } = {}) {
   if (!jwtSecret) throw new Error('Falta JWT_SECRET');
@@ -16,6 +17,7 @@ export function createApp({ db, clock = systemClock, jwtSecret = process.env.JWT
   app.get('/api/health', (_req, res) => res.json({ ok: true, now: clock.now().toISOString() }));
 
   app.use('/api/auth', authRoutes());
+  app.use('/api/services', serviceRoutes());
 
   app.use('/api', (_req, _res, next) => next(new AppError(404, 'Ruta inexistente')));
 
