@@ -11,7 +11,7 @@ Cada tarea se entrega en **un commit** cuyo mensaje empieza con su código.
 - [x] **T07** — Cancelación y cambio de estado de turnos (RN-05, RN-18..RN-21).
 - [x] **T08** — Días bloqueados (RN-13, RN-22).
 - [x] **T09** — Frontend: base, cliente de API, login y registro.
-- [ ] **T10** — Frontend: catálogo, reservar turno y mis turnos.
+- [x] **T10** — Frontend: catálogo, reservar turno y mis turnos.
 - [ ] **T11** — Frontend: panel de administración (agenda, servicios, días bloqueados).
 - [ ] **T12** — Informe de pruebas y README.
 - [ ] **T13** — Configuración de despliegue (Render, Netlify, semilla de datos).

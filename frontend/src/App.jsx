@@ -1,6 +1,9 @@
 import { NavLink, Route, Routes, useNavigate } from 'react-router-dom';
-import { useAuth } from './auth.jsx';
+import { RequireAuth, useAuth } from './auth.jsx';
 import Login from './pages/Login.jsx';
+import Services from './pages/Services.jsx';
+import Book from './pages/Book.jsx';
+import MyAppointments from './pages/MyAppointments.jsx';
 import Register from './pages/Register.jsx';
 
 function Header() {
@@ -32,7 +35,9 @@ export default function App() {
       <Header />
       <main className="container">
         <Routes>
-          <Route path="/" element={<p>Próximamente: catálogo de servicios.</p>} />
+          <Route path="/" element={<Services />} />
+          <Route path="/reservar" element={<RequireAuth role="cliente"><Book /></RequireAuth>} />
+          <Route path="/mis-turnos" element={<RequireAuth role="cliente"><MyAppointments /></RequireAuth>} />
           <Route path="/ingresar" element={<Login />} />
           <Route path="/registro" element={<Register />} />
           <Route path="*" element={<p>Página no encontrada.</p>} />
