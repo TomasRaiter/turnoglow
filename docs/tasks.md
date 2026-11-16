@@ -1,0 +1,18 @@
+# Tareas
+
+Cada tarea se entrega en **un commit** cuyo mensaje empieza con su código.
+
+- [x] **T01** — Documentación inicial: spec con reglas numeradas, AGENTS.md, plan y tareas.
+- [ ] **T02** — Estructura del backend, esquema SQL, conexión a la base y reloj inyectable.
+- [ ] **T03** — Autenticación: registro, login, JWT y roles (RN-01..RN-05).
+- [ ] **T04** — Servicios: catálogo público y ABM de administración (RN-06..RN-08).
+- [ ] **T05** — Disponibilidad de horarios (RN-09..RN-15).
+- [ ] **T06** — Reserva de turnos con todas las validaciones (RN-07, RN-09..RN-17).
+- [ ] **T07** — Cancelación y cambio de estado de turnos (RN-05, RN-18..RN-21).
+- [ ] **T08** — Días bloqueados (RN-13, RN-22).
+- [ ] **T09** — Frontend: base, cliente de API, login y registro.
+- [ ] **T10** — Frontend: catálogo, reservar turno y mis turnos.
+- [ ] **T11** — Frontend: panel de administración (agenda, servicios, días bloqueados).
+- [ ] **T12** — Informe de pruebas y README.
+- [ ] **T13** — Configuración de despliegue (Render, Netlify, semilla de datos).
+- [ ] **T14** — Publicación en Neon + Render + Netlify y links en el README.
