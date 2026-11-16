@@ -13,6 +13,6 @@ Cada tarea se entrega en **un commit** cuyo mensaje empieza con su código.
 - [x] **T09** — Frontend: base, cliente de API, login y registro.
 - [x] **T10** — Frontend: catálogo, reservar turno y mis turnos.
 - [x] **T11** — Frontend: panel de administración (agenda, servicios, días bloqueados).
-- [ ] **T12** — Informe de pruebas y README.
-- [ ] **T13** — Configuración de despliegue (Render, Netlify, semilla de datos).
+- [x] **T12** — Configuración de despliegue (Render, Netlify), semilla de datos y servidor de demo en memoria.
+- [ ] **T13** — Informe de pruebas y README.
 - [ ] **T14** — Publicación en Neon + Render + Netlify y links en el README.
