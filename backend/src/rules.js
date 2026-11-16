@@ -124,3 +124,17 @@ export function availableSlots({ date, durationMin, now, blocked = false, busy =
     (time) => !checkSlot({ start: toInstant(date, time), durationMin, now, blocked, busy }),
   );
 }
+
+// ---------- Límites de la clienta (RN-16, RN-17) ----------
+export const MAX_ACTIVE_APPOINTMENTS = 2;
+export const MAX_NO_SHOWS = 2;
+
+export function checkClientLimits({ activeFuture, noShows }) {
+  if (noShows >= MAX_NO_SHOWS) {
+    return { rule: 'RN-17', message: 'Tu cuenta tiene ausencias registradas y no puede reservar online. Comunicate con el estudio' };
+  }
+  if (activeFuture >= MAX_ACTIVE_APPOINTMENTS) {
+    return { rule: 'RN-16', message: `Podés tener como máximo ${MAX_ACTIVE_APPOINTMENTS} turnos próximos a la vez` };
+  }
+  return null;
+}

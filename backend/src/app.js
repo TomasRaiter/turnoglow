@@ -5,6 +5,7 @@ import { AppError } from './errors.js';
 import { authRoutes } from './routes/auth.js';
 import { serviceRoutes } from './routes/services.js';
 import { availabilityRoutes } from './routes/availability.js';
+import { appointmentRoutes } from './routes/appointments.js';
 
 export function createApp({ db, clock = systemClock, jwtSecret = process.env.JWT_SECRET, corsOrigin = process.env.CORS_ORIGIN } = {}) {
   if (!jwtSecret) throw new Error('Falta JWT_SECRET');
@@ -20,6 +21,7 @@ export function createApp({ db, clock = systemClock, jwtSecret = process.env.JWT
   app.use('/api/auth', authRoutes());
   app.use('/api/services', serviceRoutes());
   app.use('/api/availability', availabilityRoutes());
+  app.use('/api/appointments', appointmentRoutes());
 
   app.use('/api', (_req, _res, next) => next(new AppError(404, 'Ruta inexistente')));
 
