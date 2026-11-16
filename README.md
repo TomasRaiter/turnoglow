@@ -12,8 +12,8 @@ los servicios y los días sin atención.
 
 | | Link |
 |--|------|
-| Aplicación (frontend) | _pendiente de publicar_ |
-| API (backend) | _pendiente de publicar_ |
+| Aplicación (frontend) | **https://turnoglow.netlify.app** |
+| API (backend) | https://turnoglow-api.onrender.com/api/health |
 
 > El backend está en el plan gratuito de Render: si estuvo inactivo, **la primera carga puede tardar ~50 segundos**.
 
@@ -83,7 +83,7 @@ cd backend && npm test
 |-------|----------|---------------|
 | Base de datos | Neon | Crear proyecto y copiar el connection string |
 | Backend | Render | Blueprint [`render.yaml`](render.yaml) · variables: `DATABASE_URL`, `JWT_SECRET`, `CORS_ORIGIN`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` |
-| Frontend | Netlify | [`netlify.toml`](netlify.toml) · variable: `VITE_API_URL` = URL del backend |
+| Frontend | Netlify | Se compila con `VITE_API_URL=https://turnoglow-api.onrender.com npm run build` y se sube la carpeta `dist` (deploy manual). [`netlify.toml`](netlify.toml) queda listo para conectar el repo a Netlify |
 
 ## 🔒 Secretos
 

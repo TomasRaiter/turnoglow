@@ -16,4 +16,4 @@ Cada tarea se entrega en **un commit** cuyo mensaje empieza con su código.
 - [x] **T12** — Configuración de despliegue (Render, Netlify), semilla de datos y servidor de demo en memoria.
 - [x] **T13** — Informe de pruebas y README.
 - [x] **T14** — Build de Render con `npm install` (el lockfile de npm 11 no es compatible con `npm ci` de npm 10).
-- [ ] **T15** — Publicación en Neon + Render + Netlify y links en el README.
+- [x] **T15** — Publicación en Neon + Render + Netlify y links en el README.
