@@ -9,7 +9,7 @@ Cada tarea se entrega en **un commit** cuyo mensaje empieza con su código.
 - [x] **T05** — Disponibilidad de horarios (RN-09..RN-15).
 - [x] **T06** — Reserva de turnos con todas las validaciones (RN-07, RN-09..RN-17).
 - [x] **T07** — Cancelación y cambio de estado de turnos (RN-05, RN-18..RN-21).
-- [ ] **T08** — Días bloqueados (RN-13, RN-22).
+- [x] **T08** — Días bloqueados (RN-13, RN-22).
 - [ ] **T09** — Frontend: base, cliente de API, login y registro.
 - [ ] **T10** — Frontend: catálogo, reservar turno y mis turnos.
 - [ ] **T11** — Frontend: panel de administración (agenda, servicios, días bloqueados).

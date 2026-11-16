@@ -6,6 +6,7 @@ import { authRoutes } from './routes/auth.js';
 import { serviceRoutes } from './routes/services.js';
 import { availabilityRoutes } from './routes/availability.js';
 import { appointmentRoutes, adminAppointmentRoutes } from './routes/appointments.js';
+import { blockedDayRoutes } from './routes/blockedDays.js';
 
 export function createApp({ db, clock = systemClock, jwtSecret = process.env.JWT_SECRET, corsOrigin = process.env.CORS_ORIGIN } = {}) {
   if (!jwtSecret) throw new Error('Falta JWT_SECRET');
@@ -23,6 +24,7 @@ export function createApp({ db, clock = systemClock, jwtSecret = process.env.JWT
   app.use('/api/availability', availabilityRoutes());
   app.use('/api/appointments', appointmentRoutes());
   app.use('/api/admin/appointments', adminAppointmentRoutes());
+  app.use('/api/blocked-days', blockedDayRoutes());
 
   app.use('/api', (_req, _res, next) => next(new AppError(404, 'Ruta inexistente')));
 
